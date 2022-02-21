@@ -1,4 +1,5 @@
-runs: "composite"
+runs: 
+using: "composite"
   steps:
   - name: checkout
     id: checkout
