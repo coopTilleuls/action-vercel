@@ -1,3 +1,23 @@
+inputs:
+  SITE_NAME:
+    required: true
+  SECRET_JSON:
+    required: true
+  VERCEL_TOKEN:
+    required: true
+  VERCEL_ARGS:
+    required: true
+  VERCEL_ORG_ID:
+    required: true
+  VERCEL_PROJECT_ID:
+    required: true
+  SITE_FRONT_VERCEL_DOMAIN:
+    required: true
+
+
+
+
+
 runs: 
   using: "composite"
   steps:
@@ -9,24 +29,23 @@ runs:
     uses: coopTilleuls/action-deploy-set-env@v1
     id: deploy_set_env
     with:
-      SITE_NAME: ${{ secrets.SITE_NAME }}
-      SECRETS_JSON: ${{ toJSON(secrets) }}
+      SITE_NAME: ${{ inputs.SITE_NAME }}
+      SECRETS_JSON: ${{ inputs.toJSON }}
     
   - name: VercelDeploy 
     id: VercelDeploy
     uses: amondnet/vercel-action@v20
     with:
       # token github_action_les_tilleuls_coop sur compte de Julien, via https://vercel.com/account/tokens
-      vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      vercel-token: ${{ inputs.VERCEL_TOKEN }}
       # Optional:
-      #github-token: ${{ secrets.GITHUB_TOKEN }}
+      #github-token: ${{ inputs.GITHUB_TOKEN }}
       #vercel-args: '--prod' #Optional
-      vercel-args: '${{ steps.deploy_set_env.outputs.VERCEL_ARGS }}'
+      vercel-args: ${{ inputs.VERCEL_ARGS }}
       # org id : https://vercel.com/teams/tilleuls/settings (team id)
-      vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+      vercel-org-id: ${{ inputs.VERCEL_ORG_ID}}
       # project id : https://vercel.com/tilleuls/les-tilleuls-website/settings
-      vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+      vercel-project-id: ${{ inputs.VERCEL_PROJECT_ID}}
       #working-directory: ./frontend # already in vercel config
-      scope: ${{ secrets.VERCEL_ORG_ID}}
-      alias-domains: |
-        ${{ steps.deploy_set_env.outputs.SITE_FRONT_VERCEL_DOMAIN }}
+      scope: ${{ inputs.VERCEL_ORG_ID}}
+      alias-domains: ${{ inputs.SITE_FRONT_VERCEL_DOMAIN }}
