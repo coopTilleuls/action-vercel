@@ -30,7 +30,7 @@ runs:
     id: deploy_set_env
     with:
       SITE_NAME: ${{ inputs.SITE_NAME }}
-      SECRETS_JSON: ${{ inputs.toJSON }}
+      SECRETS_JSON: ${{ inputs.SECRETS_JSON }}
     
   - name: VercelDeploy 
     id: VercelDeploy
