@@ -1,6 +1,7 @@
 runs: "composite"
     steps:
     - name: checkout
+      id: checkout
       uses: actions/checkout@v2
 
     - name: DeploySetEnv   
@@ -11,6 +12,7 @@ runs: "composite"
         SECRETS_JSON: ${{ toJSON(secrets) }}
     
     - name: VercelDeploy 
+      id: VercelDeploy
       uses: amondnet/vercel-action@v20
       with:
         # token github_action_les_tilleuls_coop sur compte de Julien, via https://vercel.com/account/tokens
