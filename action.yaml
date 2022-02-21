@@ -1,4 +1,4 @@
-runs: composite
+runs: "composite"
     steps:
     - name: checkout
       uses: actions/checkout@v2
