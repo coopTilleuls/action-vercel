@@ -5,13 +5,9 @@ inputs:
     required: true
   VERCEL_TOKEN:
     required: true
-  VERCEL_ARGS:
-    required: true
   VERCEL_ORG_ID:
     required: true
   VERCEL_PROJECT_ID:
-    required: true
-  SITE_FRONT_VERCEL_DOMAIN:
     required: true
 
 
@@ -41,11 +37,11 @@ runs:
       # Optional:
       #github-token: ${{ inputs.GITHUB_TOKEN }}
       #vercel-args: '--prod' #Optional
-      vercel-args: ${{ inputs.VERCEL_ARGS }}
+      vercel-args: ${{ steps.deploy_set_env.outputs.VERCEL_ARGS }}
       # org id : https://vercel.com/teams/tilleuls/settings (team id)
       vercel-org-id: ${{ inputs.VERCEL_ORG_ID}}
       # project id : https://vercel.com/tilleuls/les-tilleuls-website/settings
       vercel-project-id: ${{ inputs.VERCEL_PROJECT_ID}}
       #working-directory: ./frontend # already in vercel config
       scope: ${{ inputs.VERCEL_ORG_ID}}
-      alias-domains: ${{ inputs.SITE_FRONT_VERCEL_DOMAIN }}
+      alias-domains: ${{ steps.deploy_set_env.outputs.SITE_FRONT_VERCEL_DOMAIN }}
