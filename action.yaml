@@ -30,7 +30,7 @@ runs:
     
   - name: VercelDeploy 
     id: VercelDeploy
-    uses: amondnet/vercel-action@v20
+    uses: amondnet/vercel-action@v25.1.0
     with:
       # token github_action_les_tilleuls_coop sur compte de Julien, via https://vercel.com/account/tokens
       vercel-token: ${{ inputs.VERCEL_TOKEN }}
